@@ -4,13 +4,15 @@ import Jar from "./../../assets/honey-jar.jpg";
 import Pollen from "./../../assets/pollen.jpg";
 import King from "./../../assets/basilikos-poltos.jpg";
 import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Who from "../../widgets/Who/Who";
 import Where from "../../widgets/Where/Where";
 import Kofini from "../Kofini/Kofini";
 
 export default function Home() {
   const location = useLocation();
+
+  const [showButton, setShowButton] = useState<boolean>(true);
 
   useEffect(() => {
     if (location.state?.scrollTo) {
@@ -20,6 +22,15 @@ export default function Home() {
       });
     }
   }, [location.state]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowButton(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const pageShortcuts = [
     {
@@ -71,30 +82,39 @@ export default function Home() {
           </Element>
         </div>
         <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
+          className="hidabsolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
           style={{
             backgroundImage: `url(${BeeBack})`,
             opacity: 0.2,
           }}
         ></div>
-        <div className="flex flex-col items-center w-full h-[100vh] bg-linear-to-t from-yellow-50/1 to-yellow-200/100 relative z-30">
+        <div className="flex flex-col sm:flex-row items-center w-full h-[100vh] bg-linear-to-t from-yellow-50/1 to-yellow-200/100 relative z-30">
           <Element name="section_3" className="element">
             <section className="mt-25 text-center">
-              <div className="flex flex-row justify-center ml-5 gap-12">
+              <div className="flex flex-col sm:flex-row justify-center ml-5 gap-12">
                 {pageShortcuts.map((shortcut) => (
-                  <div className="text-center" key={shortcut.title}>
-                    <img
-                      src={shortcut.imgSrc}
-                      alt={shortcut.title}
-                      className="h-[350px] w-[350px] object-cover sm:h-[450px] sm:w-[450px] rounded-full ml-15 border-amber-300 border-8 transition-shadow duration-300 cursor-pointer hover:shadow-xl hover:shadow-yellow-700"
-                    />
-                    <div className="mt-3 text-xl">
-                      <h3 className="text-gray-900 mt-15 font-sans font-semibold group-hover:underline group-hover:underline-offset-4">
-                        <Link to={shortcut.url}>{shortcut.title}</Link>
-                      </h3>
-                      <p className="mt-5 text-pretty text-lg font-sans text-gray-900 font-light animate-fade-up p-9">
-                        {shortcut.productDescr}
-                      </p>
+                  <div
+                    className="text-center ml-30 sm:text-sm"
+                    key={shortcut.title}
+                  >
+                    <div>
+                      <Link to={shortcut.url}>
+                        <img
+                          src={shortcut.imgSrc}
+                          alt={shortcut.title}
+                          className="hidden sm:block md:object-cover md:h-[450px] md:w-[450px] rounded-full border-amber-300 border-8 transition-shadow duration-300 cursor-pointer hover:shadow-xl hover:shadow-yellow-700"
+                        />
+                      </Link>
+                    </div>
+                    <div>
+                      <div className="mt-3 md:text-xl sm:text-xs">
+                        <h3 className="text-gray-900 mt-15 font-sans font-semibold group-hover:underline group-hover:underline-offset-4">
+                          <p>{shortcut.title}</p>
+                        </h3>
+                        <p className=" sm:text-xs sm:p-4 mt-5 text-pretty md:text-lg font-sans text-gray-900 font-light animate-fade-up p-9">
+                          {shortcut.productDescr}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -108,54 +128,40 @@ export default function Home() {
               <Where />
             </Element>
           </div>
-          <div className="bg-yellow-200/0 mb-10 flex justify-center items-center">
+          {showButton && (
             <button
               className="
-      mt-20
+      fixed 
+      bottom-5 
+      right-5 
       group
       p-5
-      cursor-pointer 
-      relative  
+      cursor-pointer   
       text-xl 
-      font-normal 
-      border-0 
+      font-normal  
       flex 
-      items-center 
+      items-center
       justify-center
       bg-transparent
       text-yellow-900 
       h-auto  
-      w-[170px]  
+      w-[100px]  
       overflow-hidden   
       transition-all
-      duration-100"
+      duration-100
+      border-yellow-900"
               onClick={scrollToTop}
             >
-              <span
-                className="
-         group-hover:w-full
-         absolute 
-         left-0 
-         h-full 
-         w-5 
-         border-y
-         border-l
-         border-yellow-900
-         transition-all
-         duration-500"
-              ></span>
-              <p
-                className="group-hover:opacity-0 group-hover:translate-x-[-100%] absolute translate-x-0 transition-all
-         duration-200"
-              >
-                Πάτα με
+              <span className="group-hover:w-full absolute left-0 h-full w-5 border-y border-l border-yellow-900 transition-all duration-500"></span>
+              <p className="group-hover:opacity-0 group-hover:translate-x-[-100%] absolute translate-x-0 transition-all duration-200">
+                ↑
               </p>
-              <span className="group-hover:translate-x-0  group-hover:opacity-100 absolute  translate-x-full opacity-0  transition-all duration-200">
+              <span className="group-hover:translate-x-0 group-hover:opacity-100 absolute translate-x-full opacity-0 transition-all duration-200">
                 Πάνω!
               </span>
-              <span className="group-hover:w-full absolute right-0 h-full w-5  border-y border-r  border-yellow-900 transition-all duration-500"></span>
+              <span className="group-hover:w-full absolute right-0 h-full w-5 border-y border-r border-yellow-900 transition-all duration-500"></span>
             </button>
-          </div>
+          )}
         </div>
       </div>
     </div>

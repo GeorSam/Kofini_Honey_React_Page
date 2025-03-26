@@ -17,26 +17,35 @@ export default function Header() {
       <div className="hidden md:flex justify-center bg-gradient-to-r from-gray-500 to-gray-700 text-blue-50 text-[16px] font-sans tracking-widest font-[300] h-[10vh]">
         <div className="flex space-x-40 mb-8 items-center">
           <button
-            className="hover:overline hover:text-yellow-400 mt-9 animate-fade-up hover:cursor-crosshair"
+            className="hover:overline hover:text-yellow-400 mt-9 animate-fade-up"
             onClick={() => scrollToSection("section_1")}
           >
             Kofini Honey
           </button>
           <button
-            className="hover:overline hover:text-yellow-400 mt-9 animate-fade-up hover:cursor-crosshair"
+            className="hover:overline hover:text-yellow-400 mt-9 animate-fade-up"
             onClick={() => scrollToSection("section_2")}
           >
             Ποιοί Είμαστε
           </button>
-          <img src={BeeLogo} alt="" className="w-10 h-10 mt-7 object-contain" />
           <button
-            className="hover:overline hover:text-yellow-400 mt-9 animate-fade-up hover:cursor-crosshair"
+            className="mt-4 animate-fade-up"
+            onClick={() => scrollToSection("section_1")}
+          >
+            <img
+              src={BeeLogo}
+              alt=""
+              className="w-10 h-10 mt-7 object-contain"
+            />
+          </button>
+          <button
+            className="hover:overline hover:text-yellow-400 mt-9 animate-fade-up"
             onClick={() => scrollToSection("section_3")}
           >
             Προιόντα
           </button>
           <button
-            className="hover:overline hover:text-yellow-400 mt-9 animate-fade-up hover:cursor-crosshair"
+            className="hover:overline hover:text-yellow-400 mt-9 animate-fade-up"
             onClick={() => scrollToSection("section_4")}
           >
             Πού θα μας βρείτε
