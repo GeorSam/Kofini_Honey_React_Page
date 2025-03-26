@@ -5,5 +5,5 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/Kofini_Honey_React_Page/",
+  base: "/kofini_honey_react_page/",
 });
