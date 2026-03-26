@@ -6,8 +6,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router>
+    <Router basename="/Kofini_Honey_React_Page">
       <App />
     </Router>
-  </StrictMode>
+  </StrictMode>,
 );
