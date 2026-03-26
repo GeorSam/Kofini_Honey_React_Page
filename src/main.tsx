@@ -1,13 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { HashRouter } from "react-router-dom";
 import "./index.css";
-import App from "./views/App/App.tsx";
-import { BrowserRouter as Router } from "react-router-dom";
+import App from "./views/App/App";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router basename="/Kofini_Honey_React_Page">
+    <HashRouter>
       <App />
-    </Router>
+    </HashRouter>
   </StrictMode>,
 );
